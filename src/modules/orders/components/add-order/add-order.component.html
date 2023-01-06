@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-4 p-3">
+    <form [formGroup]="form" (submit)="onSaveOrder()">
+      <div class="form-group">
+        <label class="fw-bold">Title:</label>
+        <input type="text" class="form-control" formControlName="title">
+        <div *ngIf="form.get('title')?.touched || isSubmitted">
+          <span *ngIf="form.get('title')?.errors?.['required']" class="text-danger">Title
+            is
+            required</span>
+          <span *ngIf="form.get('title')?.errors?.['minlength']" class="text-danger">Title
+            shuld be min 3 chanracters</span>
+        </div>
+      </div>
+      <div class="mt-3 image-upload">
+        <button class="btn btn-info" type="button" (click)="upload.click()">Upload Image</button>
+        <input type="file" #upload (change)="onImageUpload($event)">
+        <div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && !form.get('image')?.errors">
+          <img [src]=" imagePreview" [alt]="form.value.title">
+        </div>
+      </div>
+      <div class=" form-group">
+        <label class="fw-bold">Description:</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+        <div *ngIf="form.get('description')?.touched || isSubmitted">
+          <span *ngIf="form.get('description')?.errors?.['required']" class="text-danger">Description
+            is
+            required</span>
+          <span *ngIf="form.get('description')?.errors?.['minlength']" class="text-danger">Description
+            shuld be min 3 chanracters</span>
+        </div>
+      </div>
+      <div class="mt-2 text-end">
+        <button type="submit" class="btn btn-primary">Save Order</button> &nbsp;
+        <button class="btn btn-info" (click)="goBack()">Back</button>
+      </div>
+    </form>
+  </div>
+</div>

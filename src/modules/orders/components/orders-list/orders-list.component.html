@@ -1,0 +1,49 @@
+<div class="p-2">
+  <button class="btn btn-primary" [routerLink]="['add']">Add Order</button>
+  <div class="row p-3 order-row justify-content-center" *ngIf="orders$ | async as orders">
+    <div *ngFor="let order of orders" class="col-3 m-1 p-3 order-style">
+      <div><span class="fw-bold">ID: </span> {{order.id}}</div>
+      <div><span class="fw-bold">Title: </span> {{order.title}}</div>
+      <div class="order-image">
+        <img [src]="order.imagePath" [alt]="order.title">
+      </div>
+      <div><span class="fw-bold">Description: </span> {{order.description}}</div>
+      <div class="btn-section">
+        <button class="btn btn-warning" [routerLink]="['add', order.id]">Update</button>&nbsp; <button
+          class="btn btn-danger" (click)="onDelete(order.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addOrderModalLabel">Add Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm">
+          <div class="gorm-group">
+            <label>Title</label>
+            <input class="form-control" name="title" ngModel required #title="ngModel">
+            <span class="text-danger" *ngIf="title.errors?.['required'] && (title.touched || submittted)">Title is
+              required</span>
+          </div>
+          <div class="gorm-group">
+            <label>Description</label>
+            <textarea class="form-control" name="description" rows="6" ngModel #desc="ngModel" required></textarea>
+            <span class="text-danger" *ngIf="desc.errors?.['required'] && (desc.touched || submittted)">Description is
+              required</span>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" (click)="onAddOrder(addForm)" class="btn btn-primary" #saveBtn>Save Order</button>
+      </div>
+    </div>
+  </div>
+</div> -->
